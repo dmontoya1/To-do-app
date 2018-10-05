@@ -17,11 +17,11 @@ class App extends Component {
     this.setState({ text: value });
   }
 
-  agregarTarea = (tarea) => {
+  agregarTarea = () => {
     console.log('submit');
     this.setState({
       text: '',
-      tasks: [...this.state.tasks, tarea],
+      tasks: [...this.state.tasks, { text: this.state.text, key: Date.now() }],
     });
     console.log(this.state.tasks.length);
     console.log('salió');
@@ -36,7 +36,7 @@ class App extends Component {
           agregar={this.agregarTarea}
         />
         <Text>{this.state.text}</Text>
-        <Body />
+        <Body tasks={this.state.tasks} />
       </View>
     );
   }
