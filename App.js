@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       tasks: [],
       text: '',
+      loading: true,
     };
   }
 
@@ -52,8 +53,11 @@ class App extends Component {
   retrievePhone = () => {
     AsyncStorage.getItem('@AppCurso:tasks')
       .then((value) => {
-        console.log(value);
-        console.log(JSON.parse(value));
+        setTimeout(() => {
+          this.setState({
+            loading: false,
+          });
+        }, 2000);
         if (value !== null) {
           const newTasks = JSON.parse(value);
           this.setState({
@@ -63,6 +67,9 @@ class App extends Component {
       })
       .catch((error) => {
         console.log(error);
+        this.setState({
+          loading: false,
+        });
       });
   }
 
@@ -74,7 +81,7 @@ class App extends Component {
           changeText={this.pushText}
           agregar={this.agregarTarea}
         />
-        <Body tasks={this.state.tasks} delete={this.deleteTask} />
+        <Body tasks={this.state.tasks} delete={this.deleteTask} loading={this.state.loading} />
       </View>
     );
   }
