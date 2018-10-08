@@ -7,7 +7,6 @@ export default class Header extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> Header </Text>
         <TextInput
           style={styles.text}
           blurOnSubmit
@@ -30,5 +29,6 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingHorizontal: 16,
+    fontSize: 20,
   },
 });

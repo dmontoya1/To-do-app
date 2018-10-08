@@ -13,18 +13,21 @@ class App extends Component {
   }
 
   pushText = (value) => {
-    console.log(value);
     this.setState({ text: value });
   }
 
   agregarTarea = () => {
-    console.log('submit');
     this.setState({
       text: '',
       tasks: [...this.state.tasks, { text: this.state.text, key: Date.now() }],
     });
-    console.log(this.state.tasks.length);
-    console.log('salió');
+  }
+
+  deleteTask = (id) => {
+    const newTasks = this.state.tasks.filter(task => task.key !== id);
+    this.setState({
+      tasks: newTasks,
+    });
   }
 
   render() {
@@ -35,8 +38,7 @@ class App extends Component {
           changeText={this.pushText}
           agregar={this.agregarTarea}
         />
-        <Text>{this.state.text}</Text>
-        <Body tasks={this.state.tasks} />
+        <Body tasks={this.state.tasks} delete={this.deleteTask} />
       </View>
     );
   }
